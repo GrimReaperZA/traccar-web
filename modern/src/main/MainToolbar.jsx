@@ -45,7 +45,7 @@ const MainToolbar = ({
   const navigate = useNavigate();
   const t = useTranslation();
 
-  const deviceReadonly = useDeviceReadonly();
+  // const deviceReadonly = useDeviceReadonly();
 
   const groups = useSelector((state) => state.groups.items);
   const devices = useSelector((state) => state.devices.items);
@@ -166,11 +166,11 @@ const MainToolbar = ({
           </FormGroup>
         </div>
       </Popover>
-      <IconButton edge="end" onClick={() => navigate('/settings/device')} disabled={deviceReadonly}>
+      {/* <IconButton edge="end" onClick={() => navigate('/settings/device')} disabled={deviceReadonly}>
         <Tooltip open={!deviceReadonly && Object.keys(devices).length === 0} title={t('deviceRegisterFirst')} arrow>
           <AddIcon />
         </Tooltip>
-      </IconButton>
+      </IconButton> */}
     </Toolbar>
   );
 };

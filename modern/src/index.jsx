@@ -27,13 +27,13 @@ root.render(
         <StyledEngineProvider injectFirst>
           <AppThemeProvider>
             <CssBaseline />
-            <ServerProvider>
+            {/* <ServerProvider> */}
               <BrowserRouter>
                 <Navigation />
               </BrowserRouter>
               <ErrorHandler />
               <NativeInterface />
-            </ServerProvider>
+            {/* </ServerProvider> */}
           </AppThemeProvider>
         </StyledEngineProvider>
       </LocalizationProvider>

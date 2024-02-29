@@ -36,36 +36,23 @@ const RegisterPage = () => {
   const navigate = useNavigate();
   const t = useTranslation();
 
-  const server = useSelector((state) => state.session.server);
-  const totpForce = useSelector((state) => state.session.server.attributes.totpForce);
-
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [totpKey, setTotpKey] = useState(null);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
 
-  useEffectAsync(async () => {
-    if (totpForce) {
-      const response = await fetch('/api/users/totp', { method: 'POST' });
-      if (response.ok) {
-        setTotpKey(await response.text());
-      } else {
-        throw Error(await response.text());
-      }
-    }
-  }, [totpForce, setTotpKey]);
-
   const handleSubmit = useCatch(async () => {
-    const response = await fetch('/api/users', {
+    const response = await fetch('/api/users/create', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, password, totpKey }),
+      body: JSON.stringify({ name, email, password }),
     });
     if (response.ok) {
       setSnackbarOpen(true);
     } else {
-      throw Error(await response.text());
+      const error = await response.text();
+      console.error('Failed to create user', response.status, error);
+      throw Error(error);
     }
   });
 
@@ -73,7 +60,7 @@ const RegisterPage = () => {
     <LoginLayout>
       <div className={classes.container}>
         <div className={classes.header}>
-          {!server.newServer && (
+          {(
             <IconButton color="primary" onClick={() => navigate('/login')}>
               <ArrowBackIcon />
             </IconButton>
@@ -109,22 +96,11 @@ const RegisterPage = () => {
           autoComplete="current-password"
           onChange={(event) => setPassword(event.target.value)}
         />
-        {totpForce && (
-          <TextField
-            required
-            label={t('loginTotpKey')}
-            name="totpKey"
-            value={totpKey || ''}
-            InputProps={{
-              readOnly: true,
-            }}
-          />
-        )}
         <Button
           variant="contained"
           color="secondary"
           onClick={handleSubmit}
-          disabled={!name || !password || !(server.newServer || /(.+)@(.+)\.(.{2,})/.test(email))}
+          disabled={!name || !password || !(/(.+)@(.+)\.(.{2,})/.test(email))}
           fullWidth
         >
           {t('loginRegister')}
@@ -132,8 +108,7 @@ const RegisterPage = () => {
       </div>
       <Snackbar
         open={snackbarOpen}
-        onClose={() => {
-          dispatch(sessionActions.updateServer({ ...server, newServer: false }));
+        onClose={() => {          
           navigate('/login');
         }}
         autoHideDuration={snackBarDurationShortMs}

@@ -20,15 +20,15 @@ const LogoImage = ({ color }) => {
 
   const expanded = !useMediaQuery(theme.breakpoints.down('lg'));
 
-  const logo = useSelector((state) => state.session.server.attributes?.logo);
-  const logoInverted = useSelector((state) => state.session.server.attributes?.logoInverted);
+  // const logo = useSelector((state) => state.session.server.attributes?.logo);
+  // const logoInverted = useSelector((state) => state.session.server.attributes?.logoInverted);
 
-  if (logo) {
-    if (expanded && logoInverted) {
-      return <img className={classes.image} src={logoInverted} alt="" />;
-    }
-    return <img className={classes.image} src={logo} alt="" />;
-  }
+  // if (logo) {
+  //   if (expanded && logoInverted) {
+  //     return <img className={classes.image} src={logoInverted} alt="" />;
+  //   }
+  //   return <img className={classes.image} src={logo} alt="" />;
+  // }
   return <Logo className={classes.image} style={{ color }} />;
 };
 
