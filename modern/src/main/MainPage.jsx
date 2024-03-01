@@ -69,10 +69,10 @@ const MainPage = () => {
 
   const desktop = useMediaQuery(theme.breakpoints.up('md'));
 
-  // const mapOnSelect = useAttributePreference('mapOnSelect', true);
+  const mapOnSelect = useAttributePreference('mapOnSelect', true);
 
-  // const selectedDeviceId = useSelector((state) => state.devices.selectedId);
-  // const positions = useSelector((state) => state.session.positions);
+  const selectedDeviceId = useSelector((state) => state.devices.selectedId);
+  const positions = useSelector((state) => state.session.positions);
   const [filteredPositions, setFilteredPositions] = useState([]);
   const selectedPosition = filteredPositions.find((position) => selectedDeviceId && position.deviceId === selectedDeviceId);
 
@@ -91,23 +91,19 @@ const MainPage = () => {
 
   const onEventsClick = useCallback(() => setEventsOpen(true), [setEventsOpen]);
 
-  // useEffect(() => {
-  //   if (!desktop && mapOnSelect && selectedDeviceId) {
-  //     setDevicesOpen(false);
-  //   }
-  // }, [desktop, mapOnSelect, selectedDeviceId]);
+  useEffect(() => {
+    if (!desktop && mapOnSelect && selectedDeviceId) {
+      setDevicesOpen(false);
+    }
+  }, [desktop, mapOnSelect, selectedDeviceId]);
 
-  // useFilter(keyword, filter, filterSort, filterMap, positions, setFilteredDevices, setFilteredPositions);
+  useFilter(keyword, filter, filterSort, filterMap, positions, setFilteredDevices, setFilteredPositions);
 
   return (
     <div className={classes.root}>
-      {/* {desktop && (
-        <MainMap
-          filteredPositions={filteredPositions}
-          selectedPosition={selectedPosition}
-          onEventsClick={onEventsClick}
-        />
-      )} */}
+      {
+        desktop && (<MainMap filteredPositions={filteredPositions} selectedPosition={selectedPosition} onEventsClick={onEventsClick}/>)
+      }
       <div className={classes.sidebar}>
         <Paper square elevation={3} className={classes.header}>
           <MainToolbar
@@ -138,13 +134,13 @@ const MainPage = () => {
             <DeviceList devices={filteredDevices} />
           </Paper>
         </div>
-        {/* {desktop && (
+        {desktop && (
           <div className={classes.footer}>
             <BottomMenu />
           </div>
-        )} */}
+        )}
       </div>
-      {/* <EventsDrawer open={eventsOpen} onClose={() => setEventsOpen(false)} />
+      <EventsDrawer open={eventsOpen} onClose={() => setEventsOpen(false)} />
       {selectedDeviceId && (
         <StatusCard
           deviceId={selectedDeviceId}
@@ -152,7 +148,7 @@ const MainPage = () => {
           onClose={() => dispatch(devicesActions.selectId(null))}
           desktopPadding={theme.dimensions.drawerWidthDesktop}
         />
-      )} */}
+      )}
     </div>
   );
 };

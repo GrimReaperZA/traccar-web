@@ -120,7 +120,7 @@ const StatusCard = ({ deviceId, position, onClose, disableActions, desktopPaddin
 
   const deviceReadonly = useDeviceReadonly();
 
-  const shareDisabled = useSelector((state) => state.session.server.attributes.disableShare);
+  const shareDisabled = false; // useSelector((state) => state.session.server.attributes.disableShare);
   const user = useSelector((state) => state.session.user);
   const device = useSelector((state) => state.devices.items[deviceId]);
 

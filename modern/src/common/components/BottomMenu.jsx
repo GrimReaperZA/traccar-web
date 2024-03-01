@@ -22,8 +22,8 @@ const BottomMenu = () => {
   const dispatch = useDispatch();
   const t = useTranslation();
 
-  const readonly = useRestriction('readonly');
-  const disableReports = useRestriction('disableReports');
+  const readonly = false; // useRestriction('readonly');
+  const disableReports = false; // useRestriction('disableReports');
   const user = useSelector((state) => state.session.user);
   const socket = useSelector((state) => state.session.socket);
 
@@ -101,25 +101,19 @@ const BottomMenu = () => {
   return (
     <Paper square elevation={3}>
       <BottomNavigation value={currentSelection()} onChange={handleSelection} showLabels>
-        <BottomNavigationAction
-          label={t('mapTitle')}
+        <BottomNavigationAction label={t('mapTitle')}
           icon={(
             <Badge color="error" variant="dot" overlap="circular" invisible={socket !== false}>
               <MapIcon />
             </Badge>
           )}
-          value="map"
-        />
-        {!disableReports && (
-          <BottomNavigationAction label={t('reportTitle')} icon={<DescriptionIcon />} value="reports" />
-        )}
+          value="map"/>
+
+        <BottomNavigationAction label={t('reportTitle')} icon={<DescriptionIcon />} value="reports" />
         <BottomNavigationAction label={t('settingsTitle')} icon={<SettingsIcon />} value="settings" />
-        {readonly ? (
-          <BottomNavigationAction label={t('loginLogout')} icon={<ExitToAppIcon />} value="logout" />
-        ) : (
-          <BottomNavigationAction label={t('settingsUser')} icon={<PersonIcon />} value="account" />
-        )}
+        <BottomNavigationAction label={t('settingsUser')} icon={<PersonIcon />} value="account" />
       </BottomNavigation>
+
       <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={() => setAnchorEl(null)}>
         <MenuItem onClick={handleAccount}>
           <Typography color="textPrimary">{t('settingsUser')}</Typography>

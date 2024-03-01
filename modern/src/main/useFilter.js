@@ -5,6 +5,7 @@ import dayjs from 'dayjs';
 export default (keyword, filter, filterSort, filterMap, positions, setFilteredDevices, setFilteredPositions) => {
   const groups = useSelector((state) => state.groups.items);
   const devices = useSelector((state) => state.devices.items);
+  console.log('devices', devices);
 
   useEffect(() => {
     const deviceGroups = (device) => {

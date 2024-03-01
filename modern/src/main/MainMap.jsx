@@ -40,12 +40,7 @@ const MainMap = ({ filteredPositions, selectedPosition, onEventsClick }) => {
         <MapGeofence />
         <MapAccuracy positions={filteredPositions} />
         <MapLiveRoutes />
-        <MapPositions
-          positions={filteredPositions}
-          onClick={onMarkerClick}
-          selectedPosition={selectedPosition}
-          showStatus
-        />
+        <MapPositions positions={filteredPositions} onClick={onMarkerClick} selectedPosition={selectedPosition} showStatus/>
         <MapDefaultCamera />
         <MapSelectedDevice />
         <PoiMap />

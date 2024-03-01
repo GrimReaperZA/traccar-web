@@ -55,45 +55,40 @@ const DeviceRow = ({ data, index, style }) => {
   const dispatch = useDispatch();
   const t = useTranslation();
 
-  const admin = useAdministrator();
+  const admin = true; // useAdministrator();
 
   const item = data[index];
-  const position = useSelector((state) => state.session.positions[item.id]);
-
-  const devicePrimary = useAttributePreference('devicePrimary', 'name');
+  const position = useSelector((state) => state.session.positions[item.deviceId]);
+  const devicePrimary = 'name'; // useAttributePreference('devicePrimary', 'name');
   const deviceSecondary = useAttributePreference('deviceSecondary', '');
 
-  const secondaryText = () => {
-    let status;
-    if (item.status === 'online' || !item.lastUpdate) {
-      status = formatStatus(item.status, t);
-    } else {
-      status = dayjs(item.lastUpdate).fromNow();
-    }
-    return (
-      <>
-        {deviceSecondary && item[deviceSecondary] && `${item[deviceSecondary]} • `}
-        <span className={classes[getStatusColor(item.status)]}>{status}</span>
-      </>
-    );
-  };
+  // const secondaryText = () => {
+  //   let status;
+  //   if (item.status === 'online' || !item.lastUpdate) {
+  //     status = formatStatus(item.status, t);
+  //   } else {
+  //     status = dayjs(item.lastUpdate).fromNow();
+  //   }
+  //   return (
+  //     <>
+  //       {deviceSecondary && item[deviceSecondary] && `${item[deviceSecondary]} • `}
+  //       <span className={classes[getStatusColor(item.status)]}>{status}</span>
+  //     </>
+  //   );
+  // };
 
   return (
     <div style={style}>
-      <ListItemButton
-        key={item.id}
-        onClick={() => dispatch(devicesActions.selectId(item.id))}
-        disabled={!admin && item.disabled}
-      >
+      <ListItemButton key={item.deviceId} onClick={() => dispatch(devicesActions.selectId(item.deviceId))}>
         <ListItemAvatar>
-          <Avatar>
+          <Avatar>            
             <img className={classes.icon} src={mapIcons[mapIconKey(item.category)]} alt="" />
           </Avatar>
         </ListItemAvatar>
         <ListItemText
           primary={item[devicePrimary]}
           primaryTypographyProps={{ noWrap: true }}
-          secondary={secondaryText()}
+          // secondary={secondaryText()}
           secondaryTypographyProps={{ noWrap: true }}
         />
         {position && (
@@ -102,17 +97,6 @@ const DeviceRow = ({ data, index, style }) => {
               <Tooltip title={`${t('eventAlarm')}: ${formatAlarm(position.attributes.alarm, t)}`}>
                 <IconButton size="small">
                   <ErrorIcon fontSize="small" className={classes.error} />
-                </IconButton>
-              </Tooltip>
-            )}
-            {position.attributes.hasOwnProperty('ignition') && (
-              <Tooltip title={`${t('positionIgnition')}: ${formatBoolean(position.attributes.ignition, t)}`}>
-                <IconButton size="small">
-                  {position.attributes.ignition ? (
-                    <EngineIcon width={20} height={20} className={classes.success} />
-                  ) : (
-                    <EngineIcon width={20} height={20} className={classes.neutral} />
-                  )}
                 </IconButton>
               </Tooltip>
             )}

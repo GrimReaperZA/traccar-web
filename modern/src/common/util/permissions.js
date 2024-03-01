@@ -13,11 +13,11 @@ export const useManager = () => useSelector((state) => {
 
 export const useDeviceReadonly = () => useSelector((state) => {
   const admin = state.session.user.administrator;
-  const serverReadonly = state.session.server.readonly;
+  // const serverReadonly = state.session.server.readonly;
   const userReadonly = state.session.user.readonly;
-  const serverDeviceReadonly = state.session.server.deviceReadonly;
+  // const serverDeviceReadonly = state.session.server.deviceReadonly;
   const userDeviceReadonly = state.session.user.deviceReadonly;
-  return !admin && (serverReadonly || userReadonly || serverDeviceReadonly || userDeviceReadonly);
+  return !admin && (userReadonly || userDeviceReadonly);
 });
 
 export const useRestriction = (key) => useSelector((state) => {
