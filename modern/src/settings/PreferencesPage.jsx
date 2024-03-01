@@ -41,7 +41,7 @@ const PreferencesPage = () => {
   const [attributes, setAttributes] = useState(user.attributes);
 
   const versionApp = import.meta.env.VITE_APP_VERSION.slice(0, -2);
-  const versionServer = useSelector((state) => state.session.server.version);
+  const versionServer = '0.0.1'; //useSelector((state) => state.session.server.version);
   const socket = useSelector((state) => state.session.socket);
 
   const [token, setToken] = useState(null);
@@ -88,7 +88,7 @@ const PreferencesPage = () => {
 
   return (
     <PageLayout menu={<SettingsMenu />} breadcrumbs={['settingsTitle', 'sharedPreferences']}>
-      <Container maxWidth="xs" className={classes.container}>
+      <Container maxWidth="sm" className={classes.container}>
         {!readonly && (
           <>
             <Accordion defaultExpanded>
@@ -102,7 +102,7 @@ const PreferencesPage = () => {
                   <InputLabel>{t('mapActive')}</InputLabel>
                   <Select
                     label={t('mapActive')}
-                    value={attributes.activeMapStyles?.split(',') || ['locationIqStreets', 'osm', 'carto']}
+                    value={attributes?.activeMapStyles?.split(',') || ['locationIqStreets', 'osm', 'carto']}
                     onChange={(e, child) => {
                       const clicked = mapStyles.find((s) => s.id === child.props.value);
                       if (clicked.available) {
@@ -125,7 +125,7 @@ const PreferencesPage = () => {
                   <InputLabel>{t('mapOverlay')}</InputLabel>
                   <Select
                     label={t('mapOverlay')}
-                    value={attributes.selectedMapOverlay || ''}
+                    value={attributes?.selectedMapOverlay || ''}
                     onChange={(e) => {
                       const clicked = mapOverlays.find((o) => o.id === e.target.value);
                       if (!clicked || clicked.available) {
@@ -149,7 +149,7 @@ const PreferencesPage = () => {
                   freeSolo
                   options={Object.keys(positionAttributes)}
                   getOptionLabel={(option) => (positionAttributes[option]?.name || option)}
-                  value={attributes.positionItems?.split(',') || ['speed', 'address', 'totalDistance', 'course']}
+                  value={attributes?.positionItems?.split(',') || ['speed', 'address', 'totalDistance', 'course']}
                   onChange={(_, option) => {
                     setAttributes({ ...attributes, positionItems: option.join(',') });
                   }}
@@ -171,7 +171,7 @@ const PreferencesPage = () => {
                   <InputLabel>{t('mapLiveRoutes')}</InputLabel>
                   <Select
                     label={t('mapLiveRoutes')}
-                    value={attributes.mapLiveRoutes || 'none'}
+                    value={attributes?.mapLiveRoutes || 'none'}
                     onChange={(e) => setAttributes({ ...attributes, mapLiveRoutes: e.target.value })}
                   >
                     <MenuItem value="none">{t('sharedDisabled')}</MenuItem>
@@ -183,7 +183,7 @@ const PreferencesPage = () => {
                   <InputLabel>{t('mapDirection')}</InputLabel>
                   <Select
                     label={t('mapDirection')}
-                    value={attributes.mapDirection || 'selected'}
+                    value={attributes?.mapDirection || 'selected'}
                     onChange={(e) => setAttributes({ ...attributes, mapDirection: e.target.value })}
                   >
                     <MenuItem value="none">{t('sharedDisabled')}</MenuItem>
@@ -195,7 +195,7 @@ const PreferencesPage = () => {
                   <FormControlLabel
                     control={(
                       <Checkbox
-                        checked={attributes.hasOwnProperty('mapGeofences') ? attributes.mapGeofences : true}
+                        checked={attributes?.hasOwnProperty('mapGeofences') ? attributes.mapGeofences : true}
                         onChange={(e) => setAttributes({ ...attributes, mapGeofences: e.target.checked })}
                       />
                     )}
@@ -204,7 +204,7 @@ const PreferencesPage = () => {
                   <FormControlLabel
                     control={(
                       <Checkbox
-                        checked={attributes.hasOwnProperty('mapFollow') ? attributes.mapFollow : false}
+                        checked={attributes?.hasOwnProperty('mapFollow') ? attributes.mapFollow : false}
                         onChange={(e) => setAttributes({ ...attributes, mapFollow: e.target.checked })}
                       />
                     )}
@@ -213,7 +213,7 @@ const PreferencesPage = () => {
                   <FormControlLabel
                     control={(
                       <Checkbox
-                        checked={attributes.hasOwnProperty('mapCluster') ? attributes.mapCluster : true}
+                        checked={attributes?.hasOwnProperty('mapCluster') ? attributes.mapCluster : true}
                         onChange={(e) => setAttributes({ ...attributes, mapCluster: e.target.checked })}
                       />
                     )}
@@ -222,7 +222,7 @@ const PreferencesPage = () => {
                   <FormControlLabel
                     control={(
                       <Checkbox
-                        checked={attributes.hasOwnProperty('mapOnSelect') ? attributes.mapOnSelect : true}
+                        checked={attributes?.hasOwnProperty('mapOnSelect') ? attributes.mapOnSelect : true}
                         onChange={(e) => setAttributes({ ...attributes, mapOnSelect: e.target.checked })}
                       />
                     )}
@@ -240,7 +240,7 @@ const PreferencesPage = () => {
               <AccordionDetails className={classes.details}>
                 <SelectField
                   emptyValue={null}
-                  value={attributes.devicePrimary || 'name'}
+                  value={attributes?.devicePrimary || 'name'}
                   onChange={(e) => setAttributes({ ...attributes, devicePrimary: e.target.value })}
                   data={deviceFields}
                   titleGetter={(it) => t(it.name)}
@@ -248,7 +248,7 @@ const PreferencesPage = () => {
                 />
                 <SelectField
                   emptyValue=""
-                  value={attributes.deviceSecondary || ''}
+                  value={attributes?.deviceSecondary || ''}
                   onChange={(e) => setAttributes({ ...attributes, deviceSecondary: e.target.value })}
                   data={deviceFields}
                   titleGetter={(it) => t(it.name)}
@@ -265,7 +265,7 @@ const PreferencesPage = () => {
               <AccordionDetails className={classes.details}>
                 <SelectField
                   multiple
-                  value={attributes.soundEvents?.split(',') || []}
+                  value={attributes?.soundEvents?.split(',') || []}
                   onChange={(e) => setAttributes({ ...attributes, soundEvents: e.target.value.join(',') })}
                   endpoint="/api/notifications/types"
                   keyGetter={(it) => it.type}
@@ -274,7 +274,7 @@ const PreferencesPage = () => {
                 />
                 <SelectField
                   multiple
-                  value={attributes.soundAlarms?.split(',') || ['sos']}
+                  value={attributes?.soundAlarms?.split(',') || ['sos']}
                   onChange={(e) => setAttributes({ ...attributes, soundAlarms: e.target.value.join(',') })}
                   data={alarms}
                   keyGetter={(it) => it.key}

@@ -78,7 +78,7 @@ const ServerPage = () => {
 
   return (
     <PageLayout menu={<SettingsMenu />} breadcrumbs={['settingsTitle', 'settingsServer']}>
-      <Container maxWidth="xs" className={classes.container}>
+      <Container maxWidth="md" className={classes.container}>
         {item && (
           <>
             <Accordion defaultExpanded>
@@ -128,7 +128,7 @@ const ServerPage = () => {
                   <InputLabel>{t('settingsSpeedUnit')}</InputLabel>
                   <Select
                     label={t('settingsSpeedUnit')}
-                    value={item.attributes.speedUnit || 'kn'}
+                    value={item.attributes?.speedUnit || 'kn'}
                     onChange={(e) => setItem({ ...item, attributes: { ...item.attributes, speedUnit: e.target.value } })}
                   >
                     <MenuItem value="kn">{t('sharedKn')}</MenuItem>
@@ -140,7 +140,7 @@ const ServerPage = () => {
                   <InputLabel>{t('settingsDistanceUnit')}</InputLabel>
                   <Select
                     label={t('settingsDistanceUnit')}
-                    value={item.attributes.distanceUnit || 'km'}
+                    value={item.attributes?.distanceUnit || 'km'}
                     onChange={(e) => setItem({ ...item, attributes: { ...item.attributes, distanceUnit: e.target.value } })}
                   >
                     <MenuItem value="km">{t('sharedKm')}</MenuItem>
@@ -152,7 +152,7 @@ const ServerPage = () => {
                   <InputLabel>{t('settingsAltitudeUnit')}</InputLabel>
                   <Select
                     label={t('settingsAltitudeUnit')}
-                    value={item.attributes.altitudeUnit || 'm'}
+                    value={item.attributes?.altitudeUnit || 'm'}
                     onChange={(e) => setItem({ ...item, attributes: { ...item.attributes, altitudeUnit: e.target.value } })}
                   >
                     <MenuItem value="m">{t('sharedMeters')}</MenuItem>
@@ -163,7 +163,7 @@ const ServerPage = () => {
                   <InputLabel>{t('settingsVolumeUnit')}</InputLabel>
                   <Select
                     label={t('settingsVolumeUnit')}
-                    value={item.attributes.volumeUnit || 'ltr'}
+                    value={item.attributes?.volumeUnit || 'ltr'}
                     onChange={(e) => setItem({ ...item, attributes: { ...item.attributes, volumeUnit: e.target.value } })}
                   >
                     <MenuItem value="ltr">{t('sharedLiter')}</MenuItem>
@@ -172,7 +172,7 @@ const ServerPage = () => {
                   </Select>
                 </FormControl>
                 <SelectField
-                  value={item.attributes.timezone || ''}
+                  value={item.attributes?.timezone || ''}
                   emptyValue=""
                   onChange={(e) => setItem({ ...item, attributes: { ...item.attributes, timezone: e.target.value } })}
                   endpoint="/api/server/timezones"

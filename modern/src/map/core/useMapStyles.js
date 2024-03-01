@@ -38,47 +38,47 @@ export default () => {
   const customMapUrl = '';// useSelector((state) => state.session.server.mapUrl);
 
   return [
-    {
-      id: 'locationIqStreets',
-      title: t('mapLocationIqStreets'),
-      style: `https://tiles.locationiq.com/v3/streets/vector.json?key=${locationIqKey}`,
-      available: true,
-    },
-    {
-      id: 'locationIqDark',
-      title: t('mapLocationIqDark'),
-      style: `https://tiles.locationiq.com/v3/dark/vector.json?key=${locationIqKey}`,
-      available: true,
-    },
-    {
-      id: 'osm',
-      title: t('mapOsm'),
-      style: styleCustom({
-        tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
-        maxZoom: 19,
-        attribution: '© <a target="_top" rel="noopener" href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      }),
-      available: true,
-    },
-    {
-      id: 'openTopoMap',
-      title: t('mapOpenTopoMap'),
-      style: styleCustom({
-        tiles: ['a', 'b', 'c'].map((i) => `https://${i}.tile.opentopomap.org/{z}/{x}/{y}.png`),
-        maxZoom: 17,
-      }),
-      available: true,
-    },
-    {
-      id: 'carto',
-      title: t('mapCarto'),
-      style: styleCustom({
-        tiles: ['a', 'b', 'c', 'd'].map((i) => `https://${i}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}@2x.png`),
-        maxZoom: 22,
-        attribution: '© <a target="_top" rel="noopener" href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, © <a target="_top" rel="noopener" href="https://carto.com/attribution">CARTO</a>',
-      }),
-      available: true,
-    },
+    // {
+    //   id: 'locationIqStreets',
+    //   title: t('mapLocationIqStreets'),
+    //   style: `https://tiles.locationiq.com/v3/streets/vector.json?key=${locationIqKey}`,
+    //   available: true,
+    // },
+    // {
+    //   id: 'locationIqDark',
+    //   title: t('mapLocationIqDark'),
+    //   style: `https://tiles.locationiq.com/v3/dark/vector.json?key=${locationIqKey}`,
+    //   available: true,
+    // },
+    // {
+    //   id: 'osm',
+    //   title: t('mapOsm'),
+    //   style: styleCustom({
+    //     tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+    //     maxZoom: 19,
+    //     attribution: '© <a target="_top" rel="noopener" href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    //   }),
+    //   available: true,
+    // },
+    // {
+    //   id: 'openTopoMap',
+    //   title: t('mapOpenTopoMap'),
+    //   style: styleCustom({
+    //     tiles: ['a', 'b', 'c'].map((i) => `https://${i}.tile.opentopomap.org/{z}/{x}/{y}.png`),
+    //     maxZoom: 17,
+    //   }),
+    //   available: true,
+    // },
+    // {
+    //   id: 'carto',
+    //   title: t('mapCarto'),
+    //   style: styleCustom({
+    //     tiles: ['a', 'b', 'c', 'd'].map((i) => `https://${i}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}@2x.png`),
+    //     maxZoom: 22,
+    //     attribution: '© <a target="_top" rel="noopener" href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, © <a target="_top" rel="noopener" href="https://carto.com/attribution">CARTO</a>',
+    //   }),
+    //   available: true,
+    // },
     {
       id: 'googleRoad',
       title: t('mapGoogleRoad'),

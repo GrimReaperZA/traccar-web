@@ -11,7 +11,7 @@ import useCommandAttributes from '../../common/attributes/useCommandAttributes';
 const BaseCommandView = ({ deviceId, item, setItem }) => {
   const t = useTranslation();
 
-  const textEnabled = useSelector((state) => state.session.server.textEnabled);
+  const textEnabled = true ;// useSelector((state) => state.session.server.textEnabled);
 
   const availableAttributes = useCommandAttributes(t);
 

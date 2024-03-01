@@ -59,9 +59,9 @@ const MainToolbar = ({
 
   return (
     <Toolbar ref={toolbarRef} className={classes.toolbar}>
-      <IconButton edge="start" onClick={() => setDevicesOpen(!devicesOpen)}>
+      {/* <IconButton edge="start" onClick={() => setDevicesOpen(!devicesOpen)}>
         {devicesOpen ? <MapIcon /> : <ViewListIcon />}
-      </IconButton>
+      </IconButton> */}
       <OutlinedInput
         ref={inputRef}
         placeholder={t('sharedSearchDevices')}

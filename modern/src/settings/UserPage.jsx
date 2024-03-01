@@ -50,10 +50,10 @@ const UserPage = () => {
   const fixedEmail = useRestriction('fixedEmail');
 
   const currentUser = useSelector((state) => state.session.user);
-  const registrationEnabled = useSelector((state) => state.session.server.registration);
-  const openIdForced = useSelector((state) => state.session.server.openIdForce);
-  const totpEnable = useSelector((state) => state.session.server.attributes.totpEnable);
-  const totpForce = useSelector((state) => state.session.server.attributes.totpForce);
+  const registrationEnabled = true; // useSelector((state) => state.session.server.registration);
+  const openIdForced = false; // useSelector((state) => state.session.server.openIdForce);
+  const totpEnable = false; // useSelector((state) => state.session.server.attributes.totpEnable);
+  const totpForce = false; //useSelector((state) => state.session.server.attributes.totpForce);
 
   const mapStyles = useMapStyles();
   const commonUserAttributes = useCommonUserAttributes(t);

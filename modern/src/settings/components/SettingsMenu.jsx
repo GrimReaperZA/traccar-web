@@ -82,44 +82,44 @@ const SettingsMenu = () => {
             selected={location.pathname.startsWith('/settings/group')}
           />
         )}
-        {!features.disableDrivers && (
+        {/* {!features.disableDrivers && (
           <MenuItem
             title={t('sharedDrivers')}
             link="/settings/drivers"
             icon={<PersonIcon />}
             selected={location.pathname.startsWith('/settings/driver')}
           />
-        )}
-        {!features.disableCalendars && (
+        )} */}
+        {/* {!features.disableCalendars && (
           <MenuItem
             title={t('sharedCalendars')}
             link="/settings/calendars"
             icon={<TodayIcon />}
             selected={location.pathname.startsWith('/settings/calendar')}
           />
-        )}
-        {!features.disableComputedAttributes && (
+        )} */}
+        {/* {!features.disableComputedAttributes && (
           <MenuItem
             title={t('sharedComputedAttributes')}
             link="/settings/attributes"
             icon={<StorageIcon />}
             selected={location.pathname.startsWith('/settings/attribute')}
           />
-        )}
-        {!features.disableMaintenance && (
+        )} */}
+        {/* {!features.disableMaintenance && (
           <MenuItem
             title={t('sharedMaintenance')}
             link="/settings/maintenances"
             icon={<BuildIcon />}
             selected={location.pathname.startsWith('/settings/maintenance')}
           />
-        )}
-        <MenuItem
+        )} */}
+        {/* <MenuItem
           title={t('sharedSavedCommands')}
           link="/settings/commands"
           icon={<PublishIcon />}
           selected={location.pathname.startsWith('/settings/command')}
-        />
+        /> */}
         {supportLink && (
           <MenuItem
             title={t('settingsSupport')}
@@ -132,12 +132,12 @@ const SettingsMenu = () => {
       <Divider />
       <List>
 
-        <MenuItem
+        {/* <MenuItem
           title={t('serverAnnouncement')}
           link="/settings/announcement"
           icon={<CampaignIcon />}
           selected={location.pathname === '/settings/announcement'}
-        />
+        /> */}
         <MenuItem
           title={t('settingsServer')}
           link="/settings/server"
