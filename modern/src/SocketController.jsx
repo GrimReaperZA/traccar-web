@@ -65,21 +65,21 @@ const SocketController = () => {
 
     socket.onmessage = (event) => {
       const data = JSON.parse(event.data);
-      if (data.devices) {
-        dispatch(devicesActions.update(data.devices));
-      }
+      // if (data.devices) {
+      //   dispatch(devicesActions.update(data.devices));
+      // }
       if (data.positions) {
         dispatch(sessionActions.updatePositions(data.positions));
       }
-      if (data.events) {
-        if (!features.disableEvents) {
-          dispatch(eventsActions.add(data.events));
-        }
-        setEvents(data.events);
-      }
-      if (data.logs) {
-        dispatch(sessionActions.updateLogs(data.logs));
-      }
+      // if (data.events) {
+      //   if (!features.disableEvents) {
+      //     dispatch(eventsActions.add(data.events));
+      //   }
+      //   setEvents(data.events);
+      // }
+      // if (data.logs) {
+      //   dispatch(sessionActions.updateLogs(data.logs));
+      // }
     };
   };
 

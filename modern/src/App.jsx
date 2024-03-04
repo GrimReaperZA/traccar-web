@@ -43,7 +43,7 @@ const App = () => {
 
   return !initialized ? (<LinearProgress />) : (
     <>
-      {/* <SocketController /> */}
+      <SocketController />
       {/* <CachingController /> */}
       {/* <UpdateController /> */}
       <div className={classes.page}>

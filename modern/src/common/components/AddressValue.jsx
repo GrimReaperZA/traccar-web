@@ -7,7 +7,7 @@ import { useCatch } from '../../reactHelper';
 const AddressValue = ({ latitude, longitude, originalAddress }) => {
   const t = useTranslation();
 
-  const addressEnabled = useSelector((state) => state.session.server.geocoderEnabled);
+  const addressEnabled = true;// useSelector((state) => state.session.server.geocoderEnabled);
 
   const [address, setAddress] = useState();
 

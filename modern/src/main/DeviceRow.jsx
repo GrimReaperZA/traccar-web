@@ -93,14 +93,14 @@ const DeviceRow = ({ data, index, style }) => {
         />
         {position && (
           <>
-            {position.attributes.hasOwnProperty('alarm') && (
+            {position.attributes?.hasOwnProperty('alarm') && (
               <Tooltip title={`${t('eventAlarm')}: ${formatAlarm(position.attributes.alarm, t)}`}>
                 <IconButton size="small">
                   <ErrorIcon fontSize="small" className={classes.error} />
                 </IconButton>
               </Tooltip>
             )}
-            {position.attributes.hasOwnProperty('batteryLevel') && (
+            {position.attributes?.hasOwnProperty('batteryLevel') && (
               <Tooltip title={`${t('positionBatteryLevel')}: ${formatPercentage(position.attributes.batteryLevel)}`}>
                 <IconButton size="small">
                   {(position.attributes.batteryLevel > 70 && (
