@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import makeStyles from '@mui/styles/makeStyles';
 import {
-  IconButton, Tooltip, Avatar, ListItemAvatar, ListItemText, ListItemButton,
+  IconButton, Tooltip, Avatar, ListItemAvatar, ListItemIcon, ListItemText, ListItemButton,
 } from '@mui/material';
 import BatteryFullIcon from '@mui/icons-material/BatteryFull';
 import BatteryChargingFullIcon from '@mui/icons-material/BatteryChargingFull';
@@ -62,20 +62,20 @@ const DeviceRow = ({ data, index, style }) => {
   const devicePrimary = 'name'; // useAttributePreference('devicePrimary', 'name');
   const deviceSecondary = useAttributePreference('deviceSecondary', '');
 
-  // const secondaryText = () => {
-  //   let status;
-  //   if (item.status === 'online' || !item.lastUpdate) {
-  //     status = formatStatus(item.status, t);
-  //   } else {
-  //     status = dayjs(item.lastUpdate).fromNow();
-  //   }
-  //   return (
-  //     <>
-  //       {deviceSecondary && item[deviceSecondary] && `${item[deviceSecondary]} • `}
-  //       <span className={classes[getStatusColor(item.status)]}>{status}</span>
-  //     </>
-  //   );
-  // };
+  const secondaryText = () => {
+    let status;
+    if (item.status === 'online' || !item.lastUpdate) {
+      status = formatStatus(item.status, t);
+    } else {
+      status = dayjs(item.lastUpdate).fromNow();
+    }
+    return (
+      <>
+        {deviceSecondary && item[deviceSecondary] && `${item[deviceSecondary]} • `}
+        <span className={classes[getStatusColor(item.status)]}>{status}</span>
+      </>
+    );
+  };
 
   return (
     <div style={style}>
@@ -88,13 +88,13 @@ const DeviceRow = ({ data, index, style }) => {
         <ListItemText
           primary={item[devicePrimary]}
           primaryTypographyProps={{ noWrap: true }}
-          // secondary={secondaryText()}
+          secondary={secondaryText()}
           secondaryTypographyProps={{ noWrap: true }}
         />
         {position && (
           <>
             {position.attributes?.hasOwnProperty('alarm') && (
-              <Tooltip title={`${t('eventAlarm')}: ${formatAlarm(position.attributes.alarm, t)}`}>
+              <Tooltip title={`${t('eventAlarm')}: ${formatAlarm(position.attributes?.alarm, t)}`}>
                 <IconButton size="small">
                   <ErrorIcon fontSize="small" className={classes.error} />
                 </IconButton>

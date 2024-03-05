@@ -5,8 +5,7 @@ import dayjs from 'dayjs';
 export default (keyword, filter, filterSort, filterMap, positions, setFilteredDevices, setFilteredPositions) => {
   const groups = useSelector((state) => state.groups.items);
   const devices = useSelector((state) => state.devices.items);
-  console.log('devices', devices);
-
+  
   useEffect(() => {
     const deviceGroups = (device) => {
       const groupIds = [];
@@ -39,9 +38,10 @@ export default (keyword, filter, filterSort, filterMap, positions, setFilteredDe
       default:
         break;
     }
+
     setFilteredDevices(filtered);
-    setFilteredPositions(filterMap
-      ? filtered.map((device) => positions[device.id]).filter(Boolean)
-      : Object.values(positions));
+    
+    setFilteredPositions(filterMap ? filtered.map((device) => positions[device.id]).filter(Boolean) : Object.values(positions));
+
   }, [keyword, filter, filterSort, filterMap, groups, devices, positions, setFilteredDevices, setFilteredPositions]);
 };

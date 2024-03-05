@@ -65,18 +65,17 @@ const SocketController = () => {
 
     socket.onmessage = (event) => {
       const data = JSON.parse(event.data);
-      // if (data.devices) {
-      //   dispatch(devicesActions.update(data.devices));
-      // }
+      if (data.devices) {
+        dispatch(devicesActions.update(data.devices));
+      }
       if (data.positions) {
         dispatch(sessionActions.updatePositions(data.positions));
       }
-      // if (data.events) {
-      //   if (!features.disableEvents) {
-      //     dispatch(eventsActions.add(data.events));
-      //   }
-      //   setEvents(data.events);
-      // }
+      if (data.events) {
+          // console.log("data.events: ", data.events);
+          dispatch(eventsActions.add(data.events));
+        setEvents(data.events);
+      }
       // if (data.logs) {
       //   dispatch(sessionActions.updateLogs(data.logs));
       // }
@@ -89,12 +88,12 @@ const SocketController = () => {
 
   useEffectAsync(async () => {
     if (authenticated) {
-      const response = await fetch('/api/devices');
-      if (response.ok) {
-        dispatch(devicesActions.refresh(await response.json()));
-      } else {
-        throw Error(await response.text());
-      }
+      // const response = await fetch('/api/devices');
+      // if (response.ok) {
+      //   dispatch(devicesActions.refresh(await response.json()));
+      // } else {
+      //   throw Error(await response.text());
+      // }
       connectSocket();
       return () => {
         const socket = socketRef.current;
@@ -109,7 +108,7 @@ const SocketController = () => {
   useEffect(() => {
     setNotifications(events.map((event) => ({
       id: event.id,
-      message: event.attributes.message,
+      message: event.attributes?.message,
       show: true,
     })));
   }, [events, devices, t]);

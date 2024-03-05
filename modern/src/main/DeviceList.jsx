@@ -36,6 +36,7 @@ const DeviceList = ({ devices }) => {
   }, []);
 
   useEffectAsync(async () => {
+    console.log("fetching list of devices...")
     const response = await fetch('/api/devices');
     if (response.ok) {
       dispatch(devicesActions.refresh(await response.json()));
@@ -47,15 +48,7 @@ const DeviceList = ({ devices }) => {
   return (
     <AutoSizer className={classes.list}>
       {({ height, width }) => (
-        <FixedSizeList
-          width={width}
-          height={height}
-          itemCount={devices.length}
-          itemData={devices}
-          itemSize={72}
-          overscanCount={10}
-          innerRef={listInnerEl}
-        >
+        <FixedSizeList width={width} height={height} itemCount={devices.length} itemData={devices} itemSize={72} overscanCount={10} innerRef={listInnerEl}>
           {DeviceRow}
         </FixedSizeList>
       )}

@@ -11,7 +11,7 @@ const MapSelectedDevice = () => {
   const previousDeviceId = usePrevious(selectedDeviceId);
 
   const selectZoom = useAttributePreference('web.selectZoom', 10);
-  const mapFollow = useAttributePreference('mapFollow', false);
+  const mapFollow = true; //useAttributePreference('mapFollow', false);
 
   const position = useSelector((state) => state.session.positions[selectedDeviceId]);
 

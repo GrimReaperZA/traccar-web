@@ -39,16 +39,12 @@ const EventsDrawer = ({ open, onClose }) => {
   const formatType = (event) => formatNotificationTitle(t, {
     type: event.type,
     attributes: {
-      alarms: event.attributes.alarm,
+      alarms: event.attributes?.alarm,
     },
   });
 
   return (
-    <Drawer
-      anchor="right"
-      open={open}
-      onClose={onClose}
-    >
+    <Drawer anchor="right" open={open} onClose={onClose}>
       <Toolbar className={classes.toolbar} disableGutters>
         <Typography variant="h6" className={classes.title}>
           {t('reportEvents')}
@@ -58,21 +54,14 @@ const EventsDrawer = ({ open, onClose }) => {
         </IconButton>
       </Toolbar>
       <List className={classes.drawer} dense>
-        {events.map((event) => (
-          <ListItemButton
-            key={event.id}
-            onClick={() => navigate(`/event/${event.id}`)}
-            disabled={!event.id}
-          >
-            <ListItemText
-              primary={`${devices[event.deviceId]?.name} • ${formatType(event)}`}
-              secondary={formatTime(event.eventTime, 'seconds', hours12)}
-            />
+        {/* {events.map((event) => (
+          <ListItemButton key={event.id} onClick={() => navigate(`/event/${event.id}`)} disabled={!event.id}>
+            <ListItemText primary={`${devices[event.deviceId]?.name} • ${formatType(event)}`} secondary={formatTime(event.eventTime, 'seconds', hours12)} />
             <IconButton size="small" onClick={() => dispatch(eventsActions.delete(event))}>
               <DeleteIcon fontSize="small" className={classes.delete} />
             </IconButton>
           </ListItemButton>
-        ))}
+        ))} */}
       </List>
     </Drawer>
   );
